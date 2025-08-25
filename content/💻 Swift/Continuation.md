@@ -1,3 +1,9 @@
+---
+date: 2025-08-24
+tags:
+  - Concurrency
+  - Continuation
+---
 
 
 Swift Concurrency에서 completion handler나 delegate와 같이 **콜백 기반 비동기 코드를** **async/await 스타일로 변경**하고자 할 때 사용한다.

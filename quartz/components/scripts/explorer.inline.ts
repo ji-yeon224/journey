@@ -269,17 +269,21 @@ document.addEventListener("nav", async (e: CustomEventMap["nav"]) => {
   const currentSlug = e.detail.url
   await setupExplorer(currentSlug)
 
-  // if mobile hamburger is visible, collapse by default
-  for (const explorer of document.getElementsByClassName("explorer")) {
-    const mobileExplorer = explorer.querySelector(".mobile-explorer")
+  // 기존: 모바일에서 기본 접힘. 변경: data-autocollapse-mobile !== "false" 인 경우만 접힘
+  for (const explorer of document.getElementsByClassName("explorer") as HTMLCollectionOf<HTMLElement>) {
+    const mobileExplorer = explorer.querySelector(".mobile-explorer") as HTMLElement | null
     if (!mobileExplorer) return
 
-    if (mobileExplorer.checkVisibility()) {
+    const shouldAutoCollapseMobile = explorer.dataset.autocollapseMobile !== "false"
+    if (mobileExplorer.checkVisibility() && shouldAutoCollapseMobile) {
       explorer.classList.add("collapsed")
       explorer.setAttribute("aria-expanded", "false")
 
       // Allow <html> to be scrollable when mobile explorer is collapsed
       document.documentElement.classList.remove("mobile-no-scroll")
+    } else {
+      explorer.classList.remove("collapsed")
+      explorer.setAttribute("aria-expanded", "true")
     }
 
     mobileExplorer.classList.remove("hide-until-loaded")

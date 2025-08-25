@@ -5,7 +5,13 @@ import * as Component from "./quartz/components"
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
-  afterBody: [],
+  afterBody: [
+    // 메인(index) 페이지에서만 본문 아래에 전체 글 목록 출력
+    Component.ConditionalRender({
+      component: Component.PageList,
+      condition: (page) => page.fileData.slug === "index",
+    }),
+  ],
   footer: Component.Footer({
     links: {
       GitHub: "https://github.com/jackyzha0/quartz",
@@ -25,6 +31,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.ContentMeta(),
     Component.TagList(),
   ],
+  
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
@@ -38,7 +45,7 @@ export const defaultContentPageLayout: PageLayout = {
         { Component: Component.ReaderMode() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({ folderDefaultState: "open", useSavedState: false }),
   ],
   right: [
     Component.Graph(),
@@ -62,7 +69,7 @@ export const defaultListPageLayout: PageLayout = {
         { Component: Component.Darkmode() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({ folderDefaultState: "open", useSavedState: false }),
   ],
   right: [],
 }

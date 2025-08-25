@@ -59,7 +59,10 @@ type Props = {
 
 export const PageList: QuartzComponent = ({ cfg, fileData, allFiles, limit, sort }: Props) => {
   const sorter = sort ?? byDateAndAlphabeticalFolderFirst(cfg)
-  let list = allFiles.sort(sorter)
+  let list = allFiles
+    .filter((f) => f.slug !== fileData.slug) // 현재 페이지 제외 (index 등)
+    .filter((f) => !!f.slug && !f.slug?.endsWith("/index")) // 폴더 인덱스 제외
+    .sort(sorter)
   if (limit) {
     list = list.slice(0, limit)
   }
@@ -106,9 +109,16 @@ export const PageList: QuartzComponent = ({ cfg, fileData, allFiles, limit, sort
 PageList.css = `
 .section h3 {
   margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.3;
 }
 
 .section > .tags {
   margin: 0;
+}
+
+.section .tags .tag-link {
+  font-size: 0.75rem;
+  line-height: 1.2;
 }
 `
