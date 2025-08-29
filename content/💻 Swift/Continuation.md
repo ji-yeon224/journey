@@ -32,9 +32,9 @@ await withCheckedContinuation { continuation in
 ```swift
 func getValueAsync() async -> String {
 	await withCheckedContinuation { (continuation: CheckedContinuation<String, Never>) in
-		legacyFetch { value in
-			continuation.resume(returning: value)
-		}
+	    legacyFetch { value in
+		continuation.resume(returning: value)
+	    }
 	}
 }
 ```
@@ -46,10 +46,10 @@ enum LegacyError: Error { case failed }
 
 func getValueAsync() async throws -> String {
 	try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<String, Error>) in
-		legacyFetchWithError { value, error in
-			if let error { continuation.resume(throwing: error) }
-			else { continuation.resume(returning: value) }
-		}
+	    legacyFetchWithError { value, error in
+		if let error { continuation.resume(throwing: error) }
+		else { continuation.resume(returning: value) }
+	    }
 	}
 }
 ```
