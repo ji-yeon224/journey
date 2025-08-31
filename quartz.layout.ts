@@ -48,7 +48,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Explorer({ folderDefaultState: "open", useSavedState: false }),
   ],
   right: [
-    Component.Graph(),
+    // Component.Graph(),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
   ],
