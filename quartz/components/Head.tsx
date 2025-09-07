@@ -5,6 +5,7 @@ import { googleFontHref, googleFontSubsetHref } from "../util/theme"
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import { unescapeHTML } from "../util/escape"
 import { CustomOgImagesEmitterName } from "../plugins/emitters/ogImage"
+import StructuredData from "./StructuredData"
 export default (() => {
   const Head: QuartzComponent = ({
     cfg,
@@ -52,6 +53,7 @@ export default (() => {
         )}
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="google-site-verification" content="DUZ_dGhjD9c1LDguhCSzA_tT6lgKve2OFDUQ27Xm7zI" />
 
         <meta name="og:site_name" content={cfg.pageTitle}></meta>
         <meta property="og:title" content={title} />
@@ -85,6 +87,28 @@ export default (() => {
         <link rel="icon" href={iconPath} />
         <meta name="description" content={description} />
         <meta name="generator" content="Quartz" />
+        
+        {/* SEO 메타 태그 */}
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Journey" />
+        <meta name="keywords" content="iOS, Swift, SwiftUI, 개발, 블로그, 프로그래밍, 기술" />
+        <meta name="language" content="ko" />
+        <meta name="revisit-after" content="7 days" />
+        
+        {/* Open Graph 추가 메타 태그 */}
+        <meta property="og:locale" content="ko_KR" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        
+        {/* Twitter Card 추가 메타 태그 */}
+        <meta name="twitter:site" content="@journey" />
+        <meta name="twitter:creator" content="@journey" />
+        
+        {/* Canonical URL */}
+        <link rel="canonical" href={socialUrl} />
+        
+        {/* 구조화된 데이터 */}
+        <StructuredData fileData={fileData} cfg={cfg} />
 
         {css.map((resource) => CSSResourceToStyleElement(resource, true))}
         {js
