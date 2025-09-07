@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://journeys.pages.dev/sitemap.xml
+
+Disallow: /private/
+Disallow: /templates/
+Disallow: /.obsidian/
+
+

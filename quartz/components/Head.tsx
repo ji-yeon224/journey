@@ -5,7 +5,7 @@ import { googleFontHref, googleFontSubsetHref } from "../util/theme"
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import { unescapeHTML } from "../util/escape"
 import { CustomOgImagesEmitterName } from "../plugins/emitters/ogImage"
-import StructuredData from "./StructuredData"
+
 export default (() => {
   const Head: QuartzComponent = ({
     cfg,
@@ -106,9 +106,53 @@ export default (() => {
         
         {/* Canonical URL */}
         <link rel="canonical" href={socialUrl} />
-        
-        {/* 구조화된 데이터 */}
-        <StructuredData fileData={fileData} cfg={cfg} />
+
+        {/* 구조화된 데이터(JSON-LD) */}
+        {(() => {
+          const websiteSchema = {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: cfg.pageTitle,
+            description,
+            url: `https://${cfg.baseUrl}`,
+            inLanguage: "ko-KR",
+          }
+          const isIndex = fileData.slug === "index"
+          const articleSchema = isIndex
+            ? null
+            : {
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                headline: title,
+                description,
+                url: socialUrl,
+                datePublished:
+                  (fileData.frontmatter as any)?.date
+                    ? new Date((fileData.frontmatter as any).date as any).toISOString()
+                    : undefined,
+                dateModified: fileData.dates?.modified
+                  ? new Date(fileData.dates.modified).toISOString()
+                  : undefined,
+                inLanguage: "ko-KR",
+                keywords:
+                  (fileData.frontmatter as any)?.tags?.join(", ") ||
+                  "iOS, Swift, SwiftUI, 개발, 프로그래밍",
+              }
+          return (
+            <>
+              <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+              />
+              {articleSchema && (
+                <script
+                  type="application/ld+json"
+                  dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+                />
+              )}
+            </>
+          )
+        })()}
 
         {css.map((resource) => CSSResourceToStyleElement(resource, true))}
         {js
