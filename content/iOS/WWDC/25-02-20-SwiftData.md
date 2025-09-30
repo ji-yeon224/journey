@@ -7,6 +7,7 @@ tags:
   - WWDC23
   - SwiftData
 comments: "true"
+title: SwiftData에 대해 알아보자
 ---
 
 SwiftData는 데이터모델링과 관리 프레임워크이다.   
