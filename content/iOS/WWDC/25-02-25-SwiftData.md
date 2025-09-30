@@ -3,6 +3,7 @@ date: 2025-02-25
 tags:
   - WWDC23
   - SwiftData
+title: SwiftData 마이그레이션 하기
 ---
 
 ## Migration
