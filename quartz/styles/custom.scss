@@ -1,3 +1,10 @@
 @use "./base.scss";
 
 // put your custom CSS here!
+
+/* Light-mode inline code background: slightly lighter gray */
+:root[saved-theme="light"] article :not(pre) > code,
+:root:not([saved-theme="dark"]) article :not(pre) > code {
+  /* Mix the theme lightgray with page background to lighten subtly */
+  background: color-mix(in srgb, var(--lightgray) 40%, var(--light) 60%);
+}
