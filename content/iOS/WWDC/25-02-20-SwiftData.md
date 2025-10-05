@@ -10,7 +10,7 @@ comments: "true"
 title: SwiftData에 대해 알아보자
 ---
 
-SwiftData는 데이터모델링과 관리 프레임워크이다.   
+SwiftData는 데이터모델링과 관리 프레임워크이다.     
 다른 포멧은 제외하고 코드에만 집중하며 Swift 매크로를 통해 매끄러운 API를 만든다.  
 
 ## Schema 구성요소

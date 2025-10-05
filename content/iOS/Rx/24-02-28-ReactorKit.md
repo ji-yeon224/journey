@@ -25,7 +25,7 @@ title: ReactorKit 알아보기
 4. View에서는 State를 구독하고 있기 때문에 데이터가 변경되면 전달 받은 데이터를 UI에 업데이트 한다.
 
 ## View
-사용자 이벤트를 Reactor에 전달하고, Reactor에서 전달받은 State를 반영을 담당한다.  
+사용자 이벤트를 Reactor에 전달하고, Reactor에서 전달받은 State를 반영을 담당한다.    
 필수 구현은 `bind(reactor: Reactor)` 메서드이지만 가독성을 위해 bind를 Action과 State를 나누어 정의한다.  
 bind 메서드에 모두 정의하여도 상관 없다.
 
@@ -161,8 +161,8 @@ func changeName(_ name: String) -> Observable<Mutation> {
 ```
 
 ### @Pulse
-ReactorKit을 사용하다보면 마주치는 불편함이 있다.
-state 중 하나라도 변경되면 다른 state에도 이벤트가 전달되어 view에서 `.distinctUntilChanged()` 처리를 통해 중복 값을 처리하지 않도록 해야한다.
+ReactorKit을 사용하다보면 마주치는 불편함이 있다.  
+state 중 하나라도 변경되면 다른 state에도 이벤트가 전달되어 view에서 `.distinctUntilChanged()` 처리를 통해 중복 값을 처리하지 않도록 해야한다.  
 
 토스트나 얼럿 메세지를 보여줄 때 동일한 텍스트를 요청할 때 마다 보내줘야 할 경우가 있을 것이다. 
 
