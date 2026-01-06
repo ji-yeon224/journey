@@ -2,7 +2,7 @@
 tags:
   - SwiftUI
   - MainActor
-date: 2025-01-06
+date: 2026-01-06
 title: Swift6에서 CLLocationManagerDelegate + @MainActor 에러 해결하기
 ---
 
